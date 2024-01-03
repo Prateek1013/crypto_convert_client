@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
     showAmount:'',
+    showimg:false,
     img:''
 }
 
@@ -15,9 +16,12 @@ const resultSlice=createSlice({
         },
         setImg:(state,action)=>{
             state.img=action.payload
+        },
+        setShowImg:(state,action)=>{
+            state.showimg=action.payload;
         }
     }
 })
 
-export const {setShowAmount,setImg}=resultSlice.actions;
+export const {setShowAmount,setImg,setShowImg}=resultSlice.actions;
 export default resultSlice.reducer;
