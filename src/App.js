@@ -7,7 +7,7 @@ import Loader from "./components/Loader";
 import { BACKEND_API } from "./utils/constants";
 import { useSelector } from "react-redux";
 function App() {
-  const {showAmount}=useSelector(state=>state.result);
+  const {showAmount,showimg,img}=useSelector(state=>state.result);
   return (
     <>
       <Title />
@@ -15,7 +15,7 @@ function App() {
       <div style={{ display: "flex" }}>
         <div style={{ marginTop: "10%", marginLeft: "25%" }}>
           <div style={{ display: "flex" }}>
-            <img src="https://assets.coingecko.com/coins/images/325/small/Tether.png" />
+           { showimg ? <img src={`${img}`} /> : <p></p>}
             <Dropdown url={BACKEND_API.CRYPTO_URL}/>
           </div>
           <div style={{ marginTop: "20px" }}>

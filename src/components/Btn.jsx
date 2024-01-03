@@ -7,6 +7,8 @@ const Btn = () => {
   const dispatch=useDispatch();
     return (
         <Button type="primary" size="large" onClick={()=>{
+          if(!crypto) { alert("please select crypto from dropdown"); return; }
+          if(amount===0) { alert("please enter amount"); return; }
           dispatch(showLoader(true));
           fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=${currency}`).then(res=>res.json())
           .then(jsondata=>{
