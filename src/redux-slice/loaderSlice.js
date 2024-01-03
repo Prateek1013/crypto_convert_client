@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
-    showloader:false
+    showloader:false,
+    data:[]
 }
 
 
@@ -11,10 +12,13 @@ const loaderSlice=createSlice({
     reducers:{
         showLoader: (state,action)=>{
             state.showloader=action.payload
-        }
+        },
+        fetchData:(state,action)=>{
+            state.data=action.payload
+        } 
     }
 })
 
-export const {showLoader} = loaderSlice.actions;
+export const {showLoader,fetchData} = loaderSlice.actions;
 
 export default loaderSlice.reducer;

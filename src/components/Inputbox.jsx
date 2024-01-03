@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { Input, Tooltip } from 'antd';
+import { useDispatch } from 'react-redux';
+import { setAmount } from '../redux-slice/selectedSlice';
 const formatNumber = (value) => new Intl.NumberFormat().format(value);
 const NumericInput = (props) => {
+  const dispatch=useDispatch();
   const { value, onChange } = props;
   const handleChange = (e) => {
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
       onChange(inputValue);
+      dispatch(setAmount(inputValue));
+      console.log(inputValue);
     }
   };
 
@@ -38,6 +43,7 @@ const NumericInput = (props) => {
 };
 const Inpbox = () => {
   const [value, setValue] = useState('');
+ 
   return (
     <NumericInput
       style={{
