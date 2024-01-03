@@ -43,7 +43,6 @@ const NumericInput = (props) => {
 };
 const Inpbox = () => {
   const [value, setValue] = useState('');
- 
   return (
     <NumericInput
       style={{

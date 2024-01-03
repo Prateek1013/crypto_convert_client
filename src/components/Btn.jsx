@@ -12,7 +12,6 @@ const Btn = () => {
           dispatch(showLoader(true));
           fetch(`http://localhost:4000/convert?crypto=${crypto}&currency=${currency}`).then(res=>res.json())
           .then(jsondata=>{
-            console.log(jsondata);
             dispatch(setShowAmount(amount*jsondata[crypto][currency]));
             dispatch(showLoader(false));
           })

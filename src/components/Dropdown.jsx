@@ -1,7 +1,7 @@
-import { BackTop, Select } from "antd";
+import {  Select } from "antd";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData, showLoader } from "../redux-slice/loaderSlice";
+import { showLoader } from "../redux-slice/loaderSlice";
 import { fetchCrypto, fetchCurrencies } from "../redux-slice/dropdownSlice";
 import { setCrypto, setCurrency } from "../redux-slice/selectedSlice";
 import { setShowImg,setImg } from "../redux-slice/resultSlice";
@@ -29,19 +29,7 @@ const Dropdown = (props) => {
       fetch(url)
         .then((res) => res.json())
         .then((jsondata) => {
-          var options = jsondata.map((crypto) => ({
-            id: crypto.id,
-            symbol: crypto.symbol,
-            name: crypto.name,
-            icon: crypto.image,
-          }));
-          dispatch(fetchData(options));
-          var dat = jsondata.map((item) => ({
-            value: item.id,
-            label: item.name,
-            url:item.image
-          }));
-          dispatch(fetchCrypto(dat));
+          dispatch(fetchCrypto(jsondata));
           
         })
         .catch((err) => console.log(err.message));
@@ -50,11 +38,7 @@ const Dropdown = (props) => {
       fetch(url)
         .then((res) => res.json())
         .then((jsondata) => {
-          var curr = jsondata.map((item) => ({
-            value: item,
-            label: item,
-          }));
-          dispatch(fetchCurrencies(curr));
+          dispatch(fetchCurrencies(jsondata));
         });
     };
     dispatch(showLoader(true));
@@ -70,7 +54,6 @@ const Dropdown = (props) => {
       onChange={
         url === BACKEND_API.CRYPTO_URL ? handleCrypto : handleCurrencies
       }
-      // onSearch={onSearch}
       filterOption={filterOption}
       options={url === BACKEND_API.CRYPTO_URL ? cryptos : currencies}
     />
