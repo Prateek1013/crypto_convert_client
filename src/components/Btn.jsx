@@ -10,7 +10,7 @@ const Btn = () => {
           if(!crypto) { alert("please select crypto from dropdown"); return; }
           if(amount===0) { alert("please enter amount"); return; }
           dispatch(showLoader(true));
-          fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=${currency}`).then(res=>res.json())
+          fetch(`http://localhost:4000/convert?crypto=${crypto}&currency=${currency}`).then(res=>res.json())
           .then(jsondata=>{
             console.log(jsondata);
             dispatch(setShowAmount(amount*jsondata[crypto][currency]));
